@@ -8,7 +8,7 @@
 <style>
 * {
   box-sizing: border-box;
-  font-family: "Arial", sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body {
@@ -21,26 +21,28 @@ body {
   overflow: hidden;
 }
 
-/* Floating Hearts */
+/* Floating hearts */
 .heart {
   position: fixed;
   bottom: -20px;
-  font-size: 20px;
   animation: floatUp 6s linear forwards;
   opacity: 0.8;
 }
 
 @keyframes floatUp {
-  0% { transform: translateY(0) scale(1); opacity: 1; }
-  100% { transform: translateY(-110vh) scale(1.8); opacity: 0; }
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
 }
 
-/* Envelope */
+/* Container */
 .container {
   text-align: center;
   z-index: 10;
 }
 
+/* Envelope */
 .envelope {
   position: relative;
   width: 300px;
@@ -67,7 +69,7 @@ body {
 .letter {
   position: absolute;
   width: 90%;
-  height: 90%;
+  height: 85%;
   background: white;
   left: 5%;
   top: 100%;
@@ -75,21 +77,18 @@ body {
   border-radius: 10px;
   transition: top 0.7s ease;
   z-index: 2;
+  overflow-y: auto;   /* ✅ SCROLLABLE */
 }
 
-.letter h2 {
-  margin: 5px 0;
-  color: #ff4d6d;
-}
-
+/* Letter text */
 .letter p {
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* Open state */
 .envelope.open .letter {
-  top: 5%;
+  top: 7%;
 }
 
 .envelope.open .flap {
@@ -116,14 +115,12 @@ button {
     <div class="flap"></div>
 
     <div class="letter">
-      <h2>Harshu 💖</h2>
       <p>
-        Happy New Year, my baby ✨<br><br>
-        Every moment with you is magic.
-        You are my smile, my peace, and my forever.
-        I promise to love you more with every sunrise
-        and every heartbeat. 💕<br><br>
-        Always yours 🤍
+        <strong>Hey my baby 💕 Happy New Year ✨</strong><br><br>
+        I fall for you a little more every day ❤️<br><br>
+        I love you so, so much.<br><br>
+        Happy New Year, my love 🤍<br><br>
+        Always yours.
       </p>
     </div>
   </div>
@@ -136,7 +133,7 @@ function toggleLetter() {
   document.getElementById("envelope").classList.toggle("open");
 }
 
-/* Floating hearts generator */
+/* Floating hearts */
 setInterval(() => {
   const heart = document.createElement("div");
   heart.className = "heart";
@@ -145,10 +142,8 @@ setInterval(() => {
   heart.style.fontSize = (16 + Math.random() * 20) + "px";
   document.body.appendChild(heart);
 
-  setTimeout(() => {
-    heart.remove();
-  }, 6000);
-}, 500);
+  setTimeout(() => heart.remove(), 6000);
+}, 600);
 </script>
 
 </body>
