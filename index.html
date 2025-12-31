@@ -1,41 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Love Letter</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Letter 💖</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(#ffd6e0, #fff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Floating Hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 6s linear forwards;
+  opacity: 0.8;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-110vh) scale(1.8); opacity: 0; }
+}
+
+/* Envelope */
+.container {
+  text-align: center;
+  z-index: 10;
+}
+
+.envelope {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: #ff6b81;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Flap */
+.flap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #ff8fa3;
+  clip-path: polygon(0 0, 50% 55%, 100% 0);
+  transform-origin: top;
+  transition: transform 0.7s ease;
+  z-index: 3;
+}
+
+/* Letter */
+.letter {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  background: white;
+  left: 5%;
+  top: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  transition: top 0.7s ease;
+  z-index: 2;
+}
+
+.letter h2 {
+  margin: 5px 0;
+  color: #ff4d6d;
+}
+
+.letter p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Open state */
+.envelope.open .letter {
+  top: 5%;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+/* Button */
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  background: #ff4d6d;
+  color: white;
+}
+</style>
 </head>
+
 <body>
 
 <div class="container">
   <div class="envelope" id="envelope">
+    <div class="flap"></div>
+
     <div class="letter">
-      <p>Dear crush, 💌</p>
+      <h2>Harshu 💖</h2>
       <p>
-        You are so beautiful  
-        that every time I see you,  
-        my world stops.
+        Happy New Year, my baby ✨<br><br>
+        Every moment with you is magic.
+        You are my smile, my peace, and my forever.
+        I promise to love you more with every sunrise
+        and every heartbeat. 💕<br><br>
+        Always yours 🤍
       </p>
     </div>
-    <div class="front"></div>
-    <div class="top"></div>
   </div>
 
-  <div class="buttons">
-    <button onclick="openLetter()">OPEN</button>
-    <button onclick="closeLetter()">CLOSE</button>
-  </div>
+  <button onclick="toggleLetter()">Open / Close 💌</button>
 </div>
 
 <script>
-  function openLetter() {
-    document.getElementById("envelope").classList.add("open");
-  }
+function toggleLetter() {
+  document.getElementById("envelope").classList.toggle("open");
+}
 
-  function closeLetter() {
-    document.getElementById("envelope").classList.remove("open");
-  }
+/* Floating hearts generator */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (16 + Math.random() * 20) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}, 500);
 </script>
 
 </body>
